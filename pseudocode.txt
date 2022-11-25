@@ -1,0 +1,30 @@
+PROCEDURE game():
+    For each round of five total rounds:
+        Ask the user to enter a choice of hand to play and store it in userChoice
+        Call getComputerChoice and store the result in computerChoice
+        Call playRound(userChoice, computerChoice)
+    
+
+
+PROCEDURE playRound(userChoice, computerChoice):
+        If the user's and computer's choice are the same, display that a draw has occured, and repeat the previous steps until the choices no longer match
+
+        If the user's choice is 'rock':
+            If the computer's choice is 'scissors':
+                return 'You win! Rock crushes scissors.'
+            Else:
+                return 'You lose! Paper covers rock.'
+        Else if the user's choice is 'paper':
+            If the computer's choice is 'rock':
+                return 'You win! Paper covers rock.'
+            Else:
+                return 'You lose! Scissors cut paper.'
+        Else:
+            If the computer's choice is 'paper':
+                return 'You win! Scissors cut paper.'
+            Else:
+                return: 'You lose! Rock crushes scissors.'
+
+PROCEDURE getComputerChoice():
+    let choices = ['rock', 'paper', 'scissors']
+    Randomly select one of the three strings in choices, and return it
