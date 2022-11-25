@@ -6,6 +6,17 @@ function getComputerChoice()
     return outcomes[outcomeIndex];
 }
 
+function getUserChoice() {
+    let userChoice = prompt('Please enter a hand you would like to play ("rock", "paper", or "scissors"');
+
+    while (!['rock', 'paper', 'scissors'].includes(userChoice.toLowerCase()))
+    {
+        alert("You input doesn't match one of the available options.")
+        userChoice = prompt('Please enter a hand you would like to play ("rock", "paper", or "scissors"');
+    }
+    return userChoice;
+}
+
 function playRound(userChoice, computerChoice)
 {
     userChoice = userChoice.toLowerCase();
@@ -14,22 +25,78 @@ function playRound(userChoice, computerChoice)
     if (userChoice === 'rock')
     {
         if (computerChoice === 'scissors')
-            return 'You win! Rock crushes scissors.';
+        {
+            message = 'You win! Rock crushes scissors.';
+            hasWon = true;
+        }
         else
-            return 'You lose! Paper covers rock.'
+        {
+            message = 'You lose! Paper covers rock.'
+            hasWon = false;
+        }
     }
     else if (userChoice === 'paper')
     {
         if (computerChoice === 'rock')
-            return 'You win! Paper covers rock.';
+        {
+            message = 'You win! Paper covers rock.';
+            hasWon = true;
+        }
         else
-            return 'You lose! Scissors cut paper.';
+        {
+            message = 'You lose! Scissors cut paper.';
+            hasWon = false;
+        }
     }
     else
     {
         if (computerChoice === 'paper')
-            return 'You win!. Scissors cut paper.';
+        {
+            message = 'You win!. Scissors cut paper.';
+            hasWon = true;
+        }
         else
-            return 'You lose!. Rock crushes scissors.';
+        {
+            message = 'You lose!. Rock crushes scissors.';
+            hasWon = false;
+        }
     }
+    return {hasWon, message};
+}
+
+function game()
+{
+    let roundsWon = 0;
+    let resultMessage;
+
+    for (let i = 0; i < 5; i++)
+    {
+        let userChoice = getUserChoice();
+        let computerChoice = getComputerChoice();
+        
+        while (userChoice.toLowerCase() === computerChoice.toLowerCase())
+        {
+            alert(`Draw! You both chose ${userChoice}.`);
+            userChoice = getUserChoice();
+            computerChoice = getComputerChoice();
+        }
+        let round = playRound(userChoice, computerChoice);
+
+        if (round.hasWon === true)
+        {
+            roundsWon++;
+        }
+        alert(round.message + `\nRound number: ${i + 1}\nTotal wins: ${roundsWon}`);
+    }
+
+    if (roundsWon > 2)
+    {
+        resultMessage = 'You won'
+    }
+    else
+    {
+        resultMessage = 'You lost';
+    }
+
+    alert(`Game finished. ${resultMessage} overall, with ${roundsWon} total wins!`);
 }
