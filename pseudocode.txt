@@ -1,13 +1,20 @@
 PROCEDURE game():
     For each round of five total rounds:
-        Ask the user to enter a choice of hand to play and store it in userChoice
-        Call getComputerChoice and store the result in computerChoice
+        let userChoice;
+        let computerChoice;
+
+        While userChoice and computerChoice are equal (case insensitive):
+            While userChoice is not equal to 'rock', 'paper', or 'scissors' (case insensitive):
+                Ask the user to enter a choice of hand to play and store it in userChoice
+                
+            Call getComputerChoice and store the result in computerChoice
+
         Call playRound(userChoice, computerChoice)
     
 
 
 PROCEDURE playRound(userChoice, computerChoice):
-        If the user's and computer's choice are the same, display that a draw has occured, and repeat the previous steps until the choices no longer match
+
 
         If the user's choice is 'rock':
             If the computer's choice is 'scissors':
