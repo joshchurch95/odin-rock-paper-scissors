@@ -1,10 +1,43 @@
 const buttons = document.querySelectorAll('button');
 const resultsDiv = document.querySelector('#results');
 
-buttons.forEach(button => button.addEventListener('click', (e) => {
+const MAX_ROUNDS = 5;
+
+let roundsPlayed = 0;
+let roundsWon = 0;
+
+buttons.forEach(button => button.addEventListener('click', (e) =>
+{
+    if (roundsPlayed >= MAX_ROUNDS)
+        return;
+        
     const userChoice = e.target.getAttribute('data-choice');
     const round = playRound(userChoice, getComputerChoice());
-    resultsDiv.textContent = round.message;
+
+    if (round.hasWon)
+        roundsWon++;
+
+    resultsDiv.innerHTML = round.message +
+    `<br>Round number: ${roundsPlayed + 1}<br>Total wins: ${roundsWon}`;
+
+    // If this is the last round
+    if (roundsPlayed === MAX_ROUNDS - 1)
+    {
+        let resultMessage;
+
+        if (roundsWon > 2)
+        {
+            resultMessage = 'You won'
+        }
+        else
+        {
+            resultMessage = 'You lost';
+        }
+
+        resultsDiv.innerHTML += `<br><br>Game finished. ${resultMessage} overall, with ${roundsWon} total wins!`;
+    }
+
+    roundsPlayed++;
 }));
 
 // Return random string containing 'Rock', 'Paper', or 'Scissors'
