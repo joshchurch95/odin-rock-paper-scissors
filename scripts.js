@@ -1,8 +1,10 @@
 const buttons = document.querySelectorAll('button');
+const resultsDiv = document.querySelector('#results');
+
 buttons.forEach(button => button.addEventListener('click', (e) => {
     const userChoice = e.target.getAttribute('data-choice');
     const round = playRound(userChoice, getComputerChoice());
-    console.log(round.message);
+    resultsDiv.textContent = round.message;
 }));
 
 // Return random string containing 'Rock', 'Paper', or 'Scissors'
