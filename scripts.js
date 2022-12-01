@@ -6,13 +6,13 @@ const MAX_ROUNDS = 5;
 let roundsPlayed = 0;
 let roundsWon = 0;
 
-buttons.forEach(button => button.addEventListener('click', (e) =>
+function playRound(e)
 {
     if (roundsPlayed >= MAX_ROUNDS)
         return;
         
     const userChoice = e.target.getAttribute('data-choice');
-    const round = playRound(userChoice, getComputerChoice());
+    const round = getRoundResult(userChoice, getComputerChoice());
 
     if (round.hasWon)
         roundsWon++;
@@ -38,6 +38,12 @@ buttons.forEach(button => button.addEventListener('click', (e) =>
     }
 
     roundsPlayed++;
+}
+
+
+buttons.forEach(button => button.addEventListener('click', (e) =>
+{
+    playRound(e);
 }));
 
 // Return random string containing 'Rock', 'Paper', or 'Scissors'
@@ -48,18 +54,7 @@ function getComputerChoice()
     return outcomes[outcomeIndex];
 }
 
-function getUserChoice() {
-    let userChoice = prompt('Please enter a hand you would like to play ("rock", "paper", or "scissors"');
-
-    while (!['rock', 'paper', 'scissors'].includes(userChoice.toLowerCase()))
-    {
-        alert("You input doesn't match one of the available options.")
-        userChoice = prompt('Please enter a hand you would like to play ("rock", "paper", or "scissors"');
-    }
-    return userChoice;
-}
-
-function playRound(userChoice, computerChoice)
+function getRoundResult(userChoice, computerChoice)
 {
     userChoice = userChoice.toLowerCase();
     computerChoice = computerChoice.toLowerCase();
@@ -104,43 +99,4 @@ function playRound(userChoice, computerChoice)
         }
     }
     return {hasWon, message};
-}
-
-function game()
-{
-    let roundsWon = 0;
-    let resultMessage;
-
-    // Logic for playing five rounds temporarily disabled
-    // for (let i = 0; i < 5; i++)
-    // {
-    // }
-    // alert(round.message + `\nRound number: ${i + 1}\nTotal wins: ${roundsWon}`);
-
-    let userChoice = getUserChoice();
-    let computerChoice = getComputerChoice();
-    
-    while (userChoice.toLowerCase() === computerChoice.toLowerCase())
-    {
-        alert(`Draw! You both chose ${userChoice}.`);
-        userChoice = getUserChoice();
-        computerChoice = getComputerChoice();
-    }
-    let round = playRound(userChoice, computerChoice);
-
-    if (round.hasWon === true)
-    {
-        roundsWon++;
-    }
-
-    if (roundsWon > 2)
-    {
-        resultMessage = 'You won'
-    }
-    else
-    {
-        resultMessage = 'You lost';
-    }
-
-    alert(`Game finished. ${resultMessage} overall, with ${roundsWon} total wins!`);
 }
