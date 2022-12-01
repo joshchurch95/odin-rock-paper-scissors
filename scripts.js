@@ -69,24 +69,26 @@ function game()
     let roundsWon = 0;
     let resultMessage;
 
-    for (let i = 0; i < 5; i++)
-    {
-        let userChoice = getUserChoice();
-        let computerChoice = getComputerChoice();
-        
-        while (userChoice.toLowerCase() === computerChoice.toLowerCase())
-        {
-            alert(`Draw! You both chose ${userChoice}.`);
-            userChoice = getUserChoice();
-            computerChoice = getComputerChoice();
-        }
-        let round = playRound(userChoice, computerChoice);
+    // Logic for playing five rounds temporarily disabled
+    // for (let i = 0; i < 5; i++)
+    // {
+    // }
+    // alert(round.message + `\nRound number: ${i + 1}\nTotal wins: ${roundsWon}`);
 
-        if (round.hasWon === true)
-        {
-            roundsWon++;
-        }
-        alert(round.message + `\nRound number: ${i + 1}\nTotal wins: ${roundsWon}`);
+    let userChoice = getUserChoice();
+    let computerChoice = getComputerChoice();
+    
+    while (userChoice.toLowerCase() === computerChoice.toLowerCase())
+    {
+        alert(`Draw! You both chose ${userChoice}.`);
+        userChoice = getUserChoice();
+        computerChoice = getComputerChoice();
+    }
+    let round = playRound(userChoice, computerChoice);
+
+    if (round.hasWon === true)
+    {
+        roundsWon++;
     }
 
     if (roundsWon > 2)
